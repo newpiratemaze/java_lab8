@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -35,10 +36,12 @@
             <TextField fx:id="portFriendFld" prefHeight="25.0" prefWidth="411.0" />
          </children>
       </HBox>
+      <ProgressBar fx:id="volumeBar" prefWidth="200.0" progress="0.0" />
       <HBox alignment="CENTER" prefHeight="46.0" prefWidth="510.0">
          <children>
             <Button fx:id="connectBtn" mnemonicParsing="false" onAction="#initialize" text="Подключиться" />
          </children>
       </HBox>
+      <TextField fx:id="statusTxt" />
    </children>
 </VBox>
