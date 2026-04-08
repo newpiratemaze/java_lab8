@@ -11,7 +11,9 @@ public class Controller {
     @FXML private Button connectBtn;
     @FXML private ProgressBar volumeBar;
     @FXML private TextField statusTxt;
+    @FXML private javafx.scene.control.ListView<String> usersList;
 
+    private MulticastService multicast = new MulticastService();
     private Phone phone = new Phone();
     private boolean isConnected = false;
 
@@ -19,13 +21,15 @@ public class Controller {
     public void initialize() {
         statusTxt.setText("Ожидание вызова...");
 
+
+
         if (!isConnected) {
             try {
                 int myPort = Integer.parseInt(udpField.getText());
                 String targetIp = ipFriendFld.getText();
                 int targetPort = Integer.parseInt(portFriendFld.getText());
 
-                // Устанавливаем статус попытки подключения
+
                 statusTxt.setText("Поиск собеседника...");
 
                 phone.startCall(myPort, targetIp, targetPort, vol ->
@@ -50,5 +54,18 @@ public class Controller {
             connectBtn.setText("Подключиться");
             isConnected = false;
         }
+    }
+
+
+    @FXML
+    private void initLoad()
+    {
+        //statusTxt.setText("Ожидание вызова...");
+
+        multicast.start(
+                usernameFld.getText().isEmpty() ? "User" : usernameFld.getText(),
+                Integer.parseInt(udpField.getText().isEmpty() ? "5000" : udpField.getText()),
+                users -> usersList.getItems().setAll(users.split("\n"))
+        );
     }
 }
